@@ -227,4 +227,16 @@ export const Colors = {
     "#37474F",
     "#263238",
   ],
+  white: [
+    "#fff",
+    "#fff",
+    "#fff",
+    "#fff",
+    "#fff",
+    "#fff",
+    "#fff",
+    "#fff",
+    "#fff",
+    "#fff",
+  ],
 };
