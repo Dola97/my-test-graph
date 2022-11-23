@@ -35,7 +35,7 @@ export const Colors = {
     "#6A1B9A",
     "#4A148C",
   ],
-  deeppurple: [
+  "deep-purple": [
     "#EDE7F6",
     "#D1C4E9",
     "#B39DDB",
@@ -71,7 +71,7 @@ export const Colors = {
     "#1565C0",
     "#0D47A1",
   ],
-  lightblue: [
+  "light-blue": [
     "#E1F5FE",
     "#B3E5FC",
     "#81D4FA",
@@ -119,7 +119,7 @@ export const Colors = {
     "#2E7D32",
     "#1B5E20",
   ],
-  lightgreen: [
+  "light-green": [
     "#F1F8E9",
     "#DCEDC8",
     "#C5E1A5",
@@ -179,7 +179,7 @@ export const Colors = {
     "#EF6C00",
     "#E65100",
   ],
-  deeporange: [
+  "deep-orange": [
     "#FBE9E7",
     "#FFCCBC",
     "#FFAB91",
@@ -215,7 +215,7 @@ export const Colors = {
     "#424242",
     "#212121",
   ],
-  bluegrey: [
+  "blue-grey": [
     "#ECEFF1",
     "#CFD8DC",
     "#B0BEC5",
