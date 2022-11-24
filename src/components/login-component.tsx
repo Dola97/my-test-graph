@@ -50,7 +50,7 @@ export const LoginComponent = (props: PaperProps) => {
           {...form.getInputProps("password")}
         />
         <Checkbox color={"pink.5"} label="Remember Me?" mt="xl" size="md" />
-        <Button size="md" fullWidth bg="pink.5" radius="md">
+        <Button type="submit" size="md" fullWidth bg="pink.5" radius="md">
           LOGIN
         </Button>
       </form>
