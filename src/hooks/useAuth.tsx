@@ -1,93 +1,76 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 import api from "../api/api";
-import axios from "axios";
 import { toast } from "react-toastify";
 const AuthContext = createContext<any>(null);
 
 export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useLocalStorage("user", null);
+  const [status, updateStauts] = useState(false);
   const navigate = useNavigate();
 
   // call this function when you want to authenticate the user
-  const login = async (data: any, image: any) => {
+  const login = (data: any) => {
+    updateStauts(true);
     const { email, password } = data;
-    // api
-    //   .post("auth/local", {
-    //     identifier: email,
-    //     password: password,
-    //   })
-    //   .then((response) => {
-    //     localStorage.setItem("token", response.data.jwt);
-    //     api
-    //       .get("users/me?populate=*", {
-    //         headers: {
-    //           Authorization: `Bearer ${response.data.jwt}`,
-    //         },
-    //       })
-    //       .then(async (response) => {
-    //         const myImage = await getBase64FromUrl(
-    //           "http://localhost:1337" + response.data.image.url
-    //         );
-    //         axios
-    //           .post(
-    //             "https://faceapi.mxface.ai/api/v2/face/verify",
-    //             {
-    //               encoded_image1: myImage,
-    //               encoded_image2: image,
-    //             },
-    //             {
-    //               headers: {
-    //                 subscriptionkey: "Je6WHHWlM11UE0wb1Q-weyV85acsi1138",
-    //               },
-    //             }
-    //           )
-    //           .then((response) => {
-    //             const { matchedFaces }: any = response.data;
-    //             if (matchedFaces[0].confidence >= 80) {
-    //               let token = localStorage.getItem("token");
-    //               api
-    //                 .get("users/me?populate=*", {
-    //                   headers: {
-    //                     Authorization: `Bearer ${token}`,
-    //                   },
-    //                 })
-    //                 .then((response) => {
-    //                   setUser(response.data);
-    //                   navigate("/profile");
-    //                 });
-    //             } else {
-    //               logout();
+    api
+      .post("auth/local", {
+        identifier: email,
+        password: password,
+      })
+      .then((response) => {
+        localStorage.setItem("token", response.data.jwt);
+        setUser(response.data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("error", error);
+        toast.error(error.response.data.message);
+      });
+    updateStauts(false);
+  };
+  const _handleRegister = (data: any, form: any) => {
+    updateStauts(true);
+    const { email, password, contact, location, education, job, org, exp } =
+      data;
+    let values = {
+      email,
+      password,
+      contact,
+      location,
+      education,
+      jobTitle: job,
+      organization: org,
+      experience: exp,
+    };
 
-    //               toast.error("Not Same Person");
-    //             }
-    //           })
-    //           .catch((error) => {
-    //             console.log("error", error);
-    //           });
-    //       })
-    //       .catch((error) => {
-    //         console.log("error", error);
-    //       });
-    //   })
-    //   .catch((error) => {
-    //     console.log("error", error);
-    //     toast.error(error.response.data.message);
-    //   });
+    api
+      .post("auth/local/register", { ...values, username: `test${email}` })
+      .then((response) => {
+        form.reset();
+        navigate("/login");
+        toast.success("User Registerd Succssefully");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.error.message);
+      });
+    updateStauts(false);
   };
 
   // call this function to sign out logged in user
   const logout = () => {
     setUser(null);
     localStorage.clear();
-    navigate("/", { replace: true });
+    navigate("/login", { replace: true });
   };
 
   const value = useMemo(
     () => ({
       user,
       login,
+      status,
+      _handleRegister,
       logout,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps

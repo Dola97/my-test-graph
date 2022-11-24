@@ -11,32 +11,28 @@ import { registerSchema, registerValues } from "../schema";
 import { inputStyle } from "../theme";
 import { selectorProps } from "../component-props";
 import { registerValuesType } from "../types";
-import { _handleRegister } from "../api/register";
-import { useNavigate } from "react-router-dom";
 import { EDU, EXP, JOBTITLE, LOCATIONS, ORGS } from "../constants";
+import { useAuth } from "../hooks";
 
 export const RegisterForm = () => {
+  const { _handleRegister, status } = useAuth();
   const { classes } = inputStyle();
-  const navigate = useNavigate();
-  const [loading, updateState] = useState(false);
   const form = useForm({
     initialValues: registerValues,
     validate: registerSchema,
   });
   const _handleSubmit = useCallback(
     (data: registerValuesType) => {
-      updateState(true);
-      _handleRegister(data, form, navigate);
-      updateState(false);
+      _handleRegister(data, form);
     },
-    [form, navigate]
+    [_handleRegister, form]
   );
 
   return (
     <form onSubmit={form.onSubmit(_handleSubmit)}>
       <TextInput
         withAsterisk
-        disabled={loading}
+        disabled={status}
         label="Email"
         classNames={{ input: classes.input }}
         my="lg"
@@ -46,7 +42,7 @@ export const RegisterForm = () => {
       />
       <PasswordInput
         label="Password"
-        disabled={loading}
+        disabled={status}
         description="Password should include at least 8 characters and conatain at least 1 number and 1 special character"
         withAsterisk
         classNames={{ input: classes.input }}
@@ -57,7 +53,7 @@ export const RegisterForm = () => {
       <TextInput
         withAsterisk
         label="Contact"
-        disabled={loading}
+        disabled={status}
         classNames={{ input: classes.input }}
         my="lg"
         required
@@ -66,7 +62,7 @@ export const RegisterForm = () => {
       />
       <Select
         label="Location"
-        disabled={loading}
+        disabled={status}
         name="location"
         my="lg"
         {...selectorProps}
@@ -76,14 +72,14 @@ export const RegisterForm = () => {
       <Select
         label="Education"
         name="education"
-        disabled={loading}
+        disabled={status}
         {...selectorProps}
         {...form.getInputProps("education")}
         data={EDU}
       />
       <Select
         label="Job Title"
-        disabled={loading}
+        disabled={status}
         name="job"
         my="lg"
         {...selectorProps}
@@ -92,7 +88,7 @@ export const RegisterForm = () => {
       />
       <Select
         label="Organization"
-        disabled={loading}
+        disabled={status}
         name="org"
         {...selectorProps}
         {...form.getInputProps("org")}
@@ -100,7 +96,7 @@ export const RegisterForm = () => {
       />
       <Select
         label="Years of Experience"
-        disabled={loading}
+        disabled={status}
         name="exp"
         my="lg"
         {...selectorProps}
@@ -110,14 +106,14 @@ export const RegisterForm = () => {
 
       <Button
         my="xl"
-        disabled={loading}
+        disabled={status}
         type="submit"
         size="md"
         fullWidth
         bg="pink.5"
         radius="md"
       >
-        {loading ? <Loader /> : "Sign Up".toUpperCase()}
+        {status ? <Loader /> : "Sign Up".toUpperCase()}
       </Button>
     </form>
   );

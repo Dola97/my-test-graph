@@ -13,8 +13,10 @@ import { loginSchema, loginValues } from "../schema";
 import { SocialLinks } from "./social-links";
 import { AuthFooter } from "./auth-footer";
 import { inputStyle } from "../theme";
+import { useAuth } from "../hooks";
 
 export const LoginComponent = (props: PaperProps) => {
+  const { login } = useAuth();
   const { classes } = inputStyle();
   const form = useForm({
     initialValues: loginValues,
@@ -22,9 +24,9 @@ export const LoginComponent = (props: PaperProps) => {
   });
   const _handleSubmit = useCallback(
     (data: { email: string; password: string }) => {
-      console.log("data", data);
+      login(data);
     },
-    []
+    [login]
   );
   return (
     <Paper w="30%" radius="md" p="xl" withBorder {...props}>
