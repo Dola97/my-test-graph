@@ -1,7 +1,7 @@
 import {
   IconHome,
   IconChartArea,
-  IconStar,
+  IconDeviceAirpods,
   IconMessage,
   IconSettings,
 } from "@tabler/icons";
@@ -18,9 +18,9 @@ export const NavBarLinks = [
     Icon: IconChartArea,
   },
   {
-    name: "Apps",
-    to: "/apps",
-    Icon: IconStar,
+    name: "Devices",
+    to: "/devices",
+    Icon: IconDeviceAirpods,
   },
   {
     name: "Form",

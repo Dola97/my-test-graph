@@ -10,3 +10,13 @@ export const selectorProps = {
   nothingFound: "No options",
   placeholder: "Pick one",
 };
+
+export const selectorDevicesProps = {
+  searchable: true,
+  rightSection: <IconChevronDown size={14} />,
+  transition: "pop-top-left",
+  transitionDuration: 80,
+  transitionTimingFunction: "ease",
+  nothingFound: "No options",
+  placeholder: "Pick one",
+};

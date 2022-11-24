@@ -31,3 +31,13 @@ export const registerValues = {
   org: "",
   exp: "",
 };
+
+export const devicesValues = {
+  type: "",
+  qantity: 0,
+};
+export const devicesSchema = {
+  type: (value: string) => (value ? null : "Type Required"),
+  qantity: (val: number) =>
+    val <= 0 ? "Qantity should be bigger than zero" : null,
+};

@@ -1,5 +1,6 @@
 export * from "./links";
 export * from "./socail-links";
+export * from "./devices-types";
 export const API_BASE_URL = "http://localhost:1337/api/";
 
 export const LOCATIONS = [

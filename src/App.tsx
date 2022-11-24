@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { RegisterPage, LoginPage } from "../src/pages";
+import { RegisterPage, LoginPage, DevicesPage } from "../src/pages";
 import { AuthLayout, HomeLayout } from "../src/layouts";
 const App = () => {
   return (
@@ -10,6 +10,7 @@ const App = () => {
       </Route>
       <Route element={<HomeLayout />}>
         <Route path="/" element={<></>} />
+        <Route path="/devices" element={<DevicesPage />} />
       </Route>
     </Routes>
   );

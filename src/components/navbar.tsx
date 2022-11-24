@@ -7,8 +7,8 @@ import { IconPower } from "@tabler/icons";
 const LogoutSection = () => {
   return (
     <Flex justify="flex-start" align="center">
-      <IconPower size={30} />
-      <Text>Sign Out</Text>
+      <IconPower color="white" size={30} />
+      <Text color="white">Sign Out</Text>
     </Flex>
   );
 };
@@ -18,7 +18,7 @@ export const NavBarContent = () => {
       <Flex sx={{ justifyContent: "center" }}>
         <Indicator color="green.5">
           <Avatar radius={120 / 2} w={"120px"} h="120px" />
-          <Text mt="sm" align="center">
+          <Text color="white" mt="sm" align="center">
             USERNAME{" "}
           </Text>
         </Indicator>
@@ -56,6 +56,8 @@ const activeStyle = {
   display: "flex",
   alignItems: "center",
   color: "#fff",
+  width: "100%",
+  padding: 10,
 };
 const nonActiveStyle = {
   textDecorationLine: "none",
@@ -63,4 +65,6 @@ const nonActiveStyle = {
   alignItems: "center",
   color: "#424242",
   backgroundColor: "red",
+  width: "100%",
+  padding: 10,
 };
