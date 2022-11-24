@@ -111,7 +111,7 @@ export const RegisterForm = () => {
         ]}
       />
 
-      <Button type="submit" size="md" fullWidth bg="pink.5" radius="md">
+      <Button my="lg" type="submit" size="md" fullWidth bg="pink.5" radius="md">
         SIGN UP
       </Button>
     </form>

@@ -27,7 +27,7 @@ export const LoginComponent = (props: PaperProps) => {
     []
   );
   return (
-    <Paper w="50%" radius="md" p="xl" withBorder {...props}>
+    <Paper w="30%" radius="md" p="xl" withBorder {...props}>
       <Text color="grey.7">{"Login".toUpperCase()}</Text>
       <form onSubmit={form.onSubmit(_handleSubmit)}>
         <TextInput
@@ -50,7 +50,14 @@ export const LoginComponent = (props: PaperProps) => {
           {...form.getInputProps("password")}
         />
         <Checkbox color={"pink.5"} label="Remember Me?" mt="xl" size="md" />
-        <Button type="submit" size="md" fullWidth bg="pink.5" radius="md">
+        <Button
+          my="lg"
+          type="submit"
+          size="md"
+          fullWidth
+          bg="pink.5"
+          radius="md"
+        >
           LOGIN
         </Button>
       </form>

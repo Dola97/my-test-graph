@@ -14,7 +14,7 @@ export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
       withGlobalStyles
       withNormalizeCSS
     >
-      <AppContainer>{children}</AppContainer>
+      {children}
     </MantineProvider>
   );
 };

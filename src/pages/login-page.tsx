@@ -1,6 +1,6 @@
 import React from "react";
-import { RegisterComponent } from "../components";
+import { LoginComponent } from "../components";
 
 export const LoginPage = () => {
-  return <RegisterComponent />;
+  return <LoginComponent />;
 };
