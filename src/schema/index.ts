@@ -12,8 +12,8 @@ export const registerSchema = {
   email: (value: string) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
   password: (val: string) =>
     /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/.test(val)
-      ? "Password should include at least 8 characters and conatain at least 1 number and 1 special character"
-      : null,
+      ? null
+      : "Password should include at least 8 characters and conatain at least 1 number and 1 special character",
   contact: (value: string) => (value ? null : "Contact Required"),
   location: (value: string) => (value ? null : "Location Required"),
   education: (value: string) => (value ? null : "Education Required"),

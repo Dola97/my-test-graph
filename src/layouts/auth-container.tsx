@@ -6,7 +6,7 @@ export const AuthLayout = () => {
   const outlet = useOutlet();
 
   if (user) {
-    return <Navigate to="/profile" />;
+    return <Navigate to="/" />;
   }
 
   return (

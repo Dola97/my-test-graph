@@ -1,27 +1,42 @@
-import { useCallback } from "react";
-import { Button, PasswordInput, Select, TextInput } from "@mantine/core";
+import { useCallback, useState } from "react";
+import {
+  Button,
+  Loader,
+  PasswordInput,
+  Select,
+  TextInput,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { registerSchema, registerValues } from "../schema";
 import { inputStyle } from "../theme";
 import { selectorProps } from "../component-props";
+import { registerValuesType } from "../types";
+import { _handleRegister } from "../api/register";
+import { useNavigate } from "react-router-dom";
+import { EDU, EXP, JOBTITLE, LOCATIONS, ORGS } from "../constants";
 
 export const RegisterForm = () => {
   const { classes } = inputStyle();
+  const navigate = useNavigate();
+  const [loading, updateState] = useState(false);
   const form = useForm({
     initialValues: registerValues,
     validate: registerSchema,
   });
   const _handleSubmit = useCallback(
-    (data: { email: string; password: string }) => {
-      console.log("data", data);
+    (data: registerValuesType) => {
+      updateState(true);
+      _handleRegister(data, form, navigate);
+      updateState(false);
     },
-    []
+    [form, navigate]
   );
 
   return (
     <form onSubmit={form.onSubmit(_handleSubmit)}>
       <TextInput
         withAsterisk
+        disabled={loading}
         label="Email"
         classNames={{ input: classes.input }}
         my="lg"
@@ -31,6 +46,7 @@ export const RegisterForm = () => {
       />
       <PasswordInput
         label="Password"
+        disabled={loading}
         description="Password should include at least 8 characters and conatain at least 1 number and 1 special character"
         withAsterisk
         classNames={{ input: classes.input }}
@@ -41,6 +57,7 @@ export const RegisterForm = () => {
       <TextInput
         withAsterisk
         label="Contact"
+        disabled={loading}
         classNames={{ input: classes.input }}
         my="lg"
         required
@@ -49,70 +66,58 @@ export const RegisterForm = () => {
       />
       <Select
         label="Location"
+        disabled={loading}
         name="location"
         my="lg"
         {...selectorProps}
         {...form.getInputProps("location")}
-        data={[
-          { value: "react", label: "React" },
-          { value: "ng", label: "Angular" },
-          { value: "svelte", label: "Svelte" },
-          { value: "vue", label: "Vue" },
-        ]}
+        data={LOCATIONS}
       />
       <Select
         label="Education"
         name="education"
+        disabled={loading}
         {...selectorProps}
         {...form.getInputProps("education")}
-        data={[
-          { value: "react", label: "React" },
-          { value: "ng", label: "Angular" },
-          { value: "svelte", label: "Svelte" },
-          { value: "vue", label: "Vue" },
-        ]}
+        data={EDU}
       />
       <Select
         label="Job Title"
+        disabled={loading}
         name="job"
         my="lg"
         {...selectorProps}
         {...form.getInputProps("job")}
-        data={[
-          { value: "react", label: "React" },
-          { value: "ng", label: "Angular" },
-          { value: "svelte", label: "Svelte" },
-          { value: "vue", label: "Vue" },
-        ]}
+        data={JOBTITLE}
       />
       <Select
         label="Organization"
+        disabled={loading}
         name="org"
         {...selectorProps}
         {...form.getInputProps("org")}
-        data={[
-          { value: "react", label: "React" },
-          { value: "ng", label: "Angular" },
-          { value: "svelte", label: "Svelte" },
-          { value: "vue", label: "Vue" },
-        ]}
+        data={ORGS}
       />
       <Select
         label="Years of Experience"
+        disabled={loading}
         name="exp"
         my="lg"
         {...selectorProps}
         {...form.getInputProps("exp")}
-        data={[
-          { value: "react", label: "React" },
-          { value: "ng", label: "Angular" },
-          { value: "svelte", label: "Svelte" },
-          { value: "vue", label: "Vue" },
-        ]}
+        data={EXP}
       />
 
-      <Button my="lg" type="submit" size="md" fullWidth bg="pink.5" radius="md">
-        SIGN UP
+      <Button
+        my="xl"
+        disabled={loading}
+        type="submit"
+        size="md"
+        fullWidth
+        bg="pink.5"
+        radius="md"
+      >
+        {loading ? <Loader /> : "Sign Up".toUpperCase()}
       </Button>
     </form>
   );
