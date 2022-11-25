@@ -6,6 +6,7 @@ import {
   Header,
   MediaQuery,
   Navbar,
+  Text,
   useMantineTheme,
 } from "@mantine/core";
 import { NavBarContent } from "../components";
@@ -18,7 +19,7 @@ export const AppContainer: FC<PropsWithChildren> = ({ children }) => {
       navbarOffsetBreakpoint="sm"
       navbar={
         <Navbar
-          bg="indigo.9"
+          bg="blue-grey.9"
           hiddenBreakpoint="sm"
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
@@ -30,9 +31,12 @@ export const AppContainer: FC<PropsWithChildren> = ({ children }) => {
       header={
         <Header height={{ base: 50, md: 70 }}>
           <Box
-            bg="indigo.9"
+            bg="blue-grey.9"
             sx={{ display: "flex", alignItems: "center", height: "100%" }}
           >
+            <Text color="white" sx={{ fontWeight: "bold" }} p="md" size="xl">
+              Adel
+            </Text>
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
                 opened={opened}

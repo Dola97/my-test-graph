@@ -11,6 +11,7 @@ export const DevicesTypes = [
     value: "mobile",
     label: "Mobile",
   },
+
   {
     value: "router",
     label: "Router",

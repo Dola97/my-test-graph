@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { NavLink } from "react-router-dom";
-import { Avatar, Flex, Indicator, Text } from "@mantine/core";
+import {
+  Avatar,
+  createStyles,
+  Divider,
+  Flex,
+  Indicator,
+  Text,
+} from "@mantine/core";
 import { NavBarLinks } from "../constants";
 import { IconPower } from "@tabler/icons";
+import { useAuth } from "../hooks";
 
-const LogoutSection = () => {
-  return (
-    <Flex justify="flex-start" align="center">
-      <IconPower color="white" size={30} />
-      <Text color="white">Sign Out</Text>
-    </Flex>
-  );
-};
 export const NavBarContent = () => {
+  const { user, logout } = useAuth();
+  const { classes } = useStylesNav();
+  const _logout = useCallback(() => {
+    logout();
+  }, [logout]);
   return (
     <>
       <Flex sx={{ justifyContent: "center" }}>
         <Indicator color="green.5">
           <Avatar radius={120 / 2} w={"120px"} h="120px" />
           <Text color="white" mt="sm" align="center">
-            USERNAME{" "}
+            {user.user.username}
           </Text>
         </Indicator>
       </Flex>
@@ -34,37 +39,57 @@ export const NavBarContent = () => {
           >
             <NavLink
               to={to}
-              style={({ isActive }) =>
-                isActive ? activeStyle : nonActiveStyle
+              className={({ isActive }) =>
+                isActive ? classes.activeStyle : classes.nonActiveStyle
               }
             >
               <Icon size={30} />
-              {name}
+              <span className={classes.name}> {name}</span>
             </NavLink>
           </Flex>
         );
       })}
+
+      <Divider sx={{}} />
+
       <Flex pos="absolute" bottom={20}>
-        {LogoutSection()}
+        <Flex
+          sx={{ cursor: "pointer" }}
+          justify="flex-start"
+          align="center"
+          onClick={_logout}
+        >
+          <IconPower color="white" size={30} />
+          <Text color="white">Sign Out</Text>
+        </Flex>
       </Flex>
     </>
   );
 };
 
-const activeStyle = {
-  textDecorationLine: "none",
-  display: "flex",
-  alignItems: "center",
-  color: "#fff",
-  width: "100%",
-  padding: 10,
-};
-const nonActiveStyle = {
-  textDecorationLine: "none",
-  display: "flex",
-  alignItems: "center",
-  color: "#424242",
-  backgroundColor: "red",
-  width: "100%",
-  padding: 10,
-};
+export const useStylesNav = createStyles((theme) => ({
+  activeStyle: {
+    backgroundImage: theme.fn.gradient(),
+    textDecorationLine: "none",
+    display: "flex",
+    alignItems: "center",
+    color: "#fff",
+    width: "100%",
+    padding: 10,
+  },
+
+  nonActiveStyle: {
+    textDecorationLine: "none",
+    display: "flex",
+    alignItems: "center",
+    color: "#fff",
+    backgroundColor: "transparent",
+    width: "100%",
+    padding: 10,
+  },
+  name: {
+    color: "#fff",
+    paddingLeft: 10,
+    fontFamily: "sans-serif",
+  },
+}));

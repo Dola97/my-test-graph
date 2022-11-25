@@ -10,7 +10,7 @@ import { useForm } from "@mantine/form";
 import { registerSchema, registerValues } from "../schema";
 import { inputStyle } from "../theme";
 import { selectorProps } from "../component-props";
-import { registerValuesType } from "../types";
+import { registerValuesType } from "../types/type";
 import { EDU, EXP, JOBTITLE, LOCATIONS, ORGS } from "../constants";
 import { useAuth } from "../hooks";
 

@@ -2,3 +2,8 @@ export * from "./navbar";
 export * from "./register-component";
 export * from "./login-component";
 export * from "./choose-device";
+export * from "./charts";
+export * from "./todo-item";
+export * from "./add-modal-content";
+export * from "./Illustration";
+export * from "./empty-list";

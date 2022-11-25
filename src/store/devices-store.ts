@@ -1,8 +1,9 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
+
 export type device = {
   id: number;
-  name: string;
+  name: any;
   quantity: number;
 };
 
@@ -11,14 +12,14 @@ type DevicesState = {
   rows: device[];
   devices: device[];
   addDevice: () => void;
-  updateType: (id: number, value: string) => void;
+  updateType: (id: number, value: any) => void;
   updateQauntity: (id: number, value: number) => void;
   deleteRow: (index: number) => void;
 };
 const initialRow: device = {
   id: 0,
   name: "",
-  quantity: 0,
+  quantity: 1,
 };
 
 export const useDevicesStore = create<DevicesState>()(
@@ -53,7 +54,6 @@ export const useDevicesStore = create<DevicesState>()(
             }
             return row;
           });
-
           return {
             rows,
           };
@@ -75,7 +75,7 @@ export const useDevicesStore = create<DevicesState>()(
       },
     }),
     {
-      name: "devices-storage-v1", // unique name
+      name: "devices-storage-v-2", // unique name
       getStorage: () => localStorage, // (optional) by default, 'localStorage' is used
     }
   )

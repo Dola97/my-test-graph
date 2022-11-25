@@ -7,10 +7,10 @@ export const DevicesPage = () => {
   const id = useId();
   const { rows, addDevice } = useDevicesStore();
   const renderRows = useMemo(() => {
-    return rows.map((row) => {
+    return rows.map((row, key) => {
       return (
         <Fragment key={`adder-row-${row.id}-${id}`}>
-          <ChooseDeviceComponent {...row} />
+          <ChooseDeviceComponent index={key} {...row} />
         </Fragment>
       );
     });

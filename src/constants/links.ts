@@ -1,20 +1,21 @@
 import {
   IconHome,
-  IconChartArea,
+  IconList,
   IconDeviceAirpods,
   IconMessage,
   IconSettings,
+  IconChartArea,
 } from "@tabler/icons";
 
 export const NavBarLinks = [
   {
     name: "Dashboard",
-    to: "/dashboard",
+    to: "/",
     Icon: IconHome,
   },
   {
-    name: "Chart",
-    to: "/chart",
+    name: "Graph",
+    to: "/graph",
     Icon: IconChartArea,
   },
   {
@@ -23,9 +24,9 @@ export const NavBarLinks = [
     Icon: IconDeviceAirpods,
   },
   {
-    name: "Form",
-    to: "/from",
-    Icon: IconChartArea,
+    name: "To Do List",
+    to: "/todolist",
+    Icon: IconList,
   },
   {
     name: "Chart",

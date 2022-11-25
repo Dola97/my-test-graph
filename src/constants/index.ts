@@ -1,7 +1,10 @@
 export * from "./links";
 export * from "./socail-links";
 export * from "./devices-types";
-export const API_BASE_URL = "http://localhost:1337/api/";
+export const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_PROD_API_URL
+    : process.env.REACT_APP_DEV_API_URL;
 
 export const LOCATIONS = [
   { value: "dubai", label: "Duabi" },

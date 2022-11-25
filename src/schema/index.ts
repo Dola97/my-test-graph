@@ -32,12 +32,11 @@ export const registerValues = {
   exp: "",
 };
 
-export const devicesValues = {
-  type: "",
-  qantity: 0,
+export const itemsValues = {
+  name: "",
+  desciption: "",
 };
-export const devicesSchema = {
-  type: (value: string) => (value ? null : "Type Required"),
-  qantity: (val: number) =>
-    val <= 0 ? "Qantity should be bigger than zero" : null,
+export const ItemsSchema = {
+  name: (value: string) => (value ? null : "Name Required"),
+  desciption: (value: string) => (value ? null : "Description Required"),
 };
