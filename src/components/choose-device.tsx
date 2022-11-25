@@ -25,7 +25,6 @@ export const ChooseDeviceComponent: FC<deviceType> = ({
   }, [id, deleteRow]);
   const onQauntityChange = useCallback(
     (value: number) => {
-      console.log("value", value);
       updateQauntity(id, value);
     },
     [id, updateQauntity]

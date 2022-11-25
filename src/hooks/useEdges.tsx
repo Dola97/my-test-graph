@@ -13,13 +13,6 @@ export const useEdges = (Nodes: NodesType[]) => {
         to: node.id,
       });
     });
-    //   for (let i = 1; i <= Nodes; i++) {
-
-    //     edgesNodes.push({
-    //       label: obj.name.label,
-    //       id: obj.id + Math.random(),
-    //     });
-    //   }
 
     return edgesNodes;
   }, [Nodes]);

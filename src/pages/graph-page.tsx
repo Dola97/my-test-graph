@@ -6,11 +6,8 @@ export const GraphPage = () => {
   const { rows } = useDevicesStore();
   const { Nodes } = useFilterUndifined(rows);
   const { graphNodes } = useGraphNodes(Nodes);
-
-  console.log("graphNodes", graphNodes);
   const { edgesNodes } = useEdges(graphNodes);
-  console.log("graphNodes", graphNodes);
-  console.log("E", edgesNodes);
+
   const graph = {
     nodes: graphNodes,
     edges: edgesNodes,
@@ -25,9 +22,7 @@ export const GraphPage = () => {
     height: "500px",
   };
   const events = {
-    select: function (event: any) {
-      var { nodes, edges } = event;
-    },
+    select: function (event: any) {},
   };
   return (
     <Graph
