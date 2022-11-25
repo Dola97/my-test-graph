@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: any) => {
   const navigate = useNavigate();
 
   // call this function when you want to authenticate the user
-  const login = (data: any) => {
+  const login = async (data: any) => {
     updateStauts(true);
     const { email, password } = data;
     api
@@ -23,13 +23,15 @@ export const AuthProvider = ({ children }: any) => {
         localStorage.setItem("token", response.data.jwt);
         setUser(response.data);
         navigate("/");
+        updateStauts(false);
       })
       .catch((error) => {
+        console.log("e", error);
         toast.error(error.response.data.message);
+        updateStauts(false);
       });
-    updateStauts(false);
   };
-  const _handleRegister = (data: any, form: any) => {
+  const _handleRegister = async (data: any, form: any) => {
     updateStauts(true);
     const { email, password, contact, location, education, job, org, exp } =
       data;
@@ -50,11 +52,13 @@ export const AuthProvider = ({ children }: any) => {
         form.reset();
         navigate("/login");
         toast.success("User Registerd Succssefully");
+        updateStauts(false);
       })
       .catch((error) => {
+        console.log("e", error);
         toast.error(error.response.data.error.message);
+        updateStauts(false);
       });
-    updateStauts(false);
   };
 
   // call this function to sign out logged in user
@@ -73,7 +77,7 @@ export const AuthProvider = ({ children }: any) => {
       logout,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user]
+    [user, status]
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

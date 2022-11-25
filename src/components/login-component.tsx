@@ -7,6 +7,7 @@ import {
   PasswordInput,
   Checkbox,
   Button,
+  Loader,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { loginSchema, loginValues } from "../schema";
@@ -16,7 +17,7 @@ import { inputStyle } from "../theme";
 import { useAuth } from "../hooks";
 
 export const LoginComponent = (props: PaperProps) => {
-  const { login } = useAuth();
+  const { login, status } = useAuth();
   const { classes } = inputStyle();
   const form = useForm({
     initialValues: loginValues,
@@ -34,6 +35,7 @@ export const LoginComponent = (props: PaperProps) => {
       <form onSubmit={form.onSubmit(_handleSubmit)}>
         <TextInput
           withAsterisk
+          disabled={status}
           label="Email"
           classNames={{ input: classes.input }}
           my="lg"
@@ -43,6 +45,7 @@ export const LoginComponent = (props: PaperProps) => {
         />
         <PasswordInput
           label="Password"
+          disabled={status}
           description="Password must include at least one capital letter, It should start with special character @ or #,Length of password should be between range 8 to 14"
           withAsterisk
           classNames={{ input: classes.input }}
@@ -51,16 +54,23 @@ export const LoginComponent = (props: PaperProps) => {
           required
           {...form.getInputProps("password")}
         />
-        <Checkbox color={"pink.5"} label="Remember Me?" mt="xl" size="md" />
+        <Checkbox
+          disabled={status}
+          color={"pink.5"}
+          label="Remember Me?"
+          mt="xl"
+          size="md"
+        />
         <Button
           my="lg"
           type="submit"
           size="md"
+          disabled={status}
           fullWidth
           bg="pink.5"
           radius="md"
         >
-          LOGIN
+          {status ? <Loader /> : "LOGIN"}
         </Button>
       </form>
       <SocialLinks />
