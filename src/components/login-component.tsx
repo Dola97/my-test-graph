@@ -30,7 +30,7 @@ export const LoginComponent = (props: PaperProps) => {
     [login]
   );
   return (
-    <Paper w="30%" radius="md" p="xl" withBorder {...props}>
+    <Paper w="auto" radius="md" p="xl" withBorder {...props}>
       <Text color="grey.7">{"Login".toUpperCase()}</Text>
       <form onSubmit={form.onSubmit(_handleSubmit)}>
         <TextInput

@@ -5,7 +5,7 @@ import { RegisterForm } from "./register-form";
 
 export const RegisterComponent = (props: PaperProps) => {
   return (
-    <Paper w="30%" radius="md" p="xl" withBorder {...props}>
+    <Paper w="auto" radius="md" p="xl" withBorder {...props}>
       <Text color="grey.7">{"Register".toUpperCase()}</Text>
       <RegisterForm />
       <SocialLinks />
